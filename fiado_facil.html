@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiado Fácil — Controle da loja</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#687386;--line:#e5eaf1;--green:#16845b;--green2:#e6f6ee;--red:#c43d4b;--amber:#a76508;--shadow:0 8px 28px rgba(20,35,60,.07)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 14px;font-weight:650;background:var(--green);color:#fff}button:hover{filter:brightness(.96)}button.secondary{background:#edf1f6;color:#263247}button.danger{background:#fff0f1;color:var(--red)}button.small{padding:7px 10px;font-size:13px}.muted{color:var(--muted)}.hidden{display:none!important}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#e6f7ef,#f4f7fb 55%,#e9efff)}.login-card{width:min(420px,100%);background:white;border:1px solid var(--line);border-radius:22px;padding:30px;box-shadow:var(--shadow)}.logo{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:850;letter-spacing:-.5px}.logo-mark{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--green);color:white;font-size:23px}.login-card h1{font-size:26px;margin:24px 0 8px}.field{display:grid;gap:6px;margin:13px 0}.field label{font-size:13px;font-weight:700;color:#4c576b}.field input,.field select,.field textarea,.search{width:100%;border:1px solid #d8dfeb;background:white;border-radius:10px;padding:11px 12px;outline:none;color:var(--ink)}.field input:focus,.field select:focus,.search:focus{border-color:var(--green);box-shadow:0 0 0 3px #16845b1c}.login-card .field{margin:16px 0}.login-card button{width:100%;margin-top:8px}.hint{font-size:12px;line-height:1.5;background:#f4f7fb;padding:10px 12px;border-radius:10px;margin-top:16px;color:#566174}
+.app{min-height:100vh}.topbar{height:74px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:5}.topbar .logo{font-size:19px}.topbar .logo-mark{width:38px;height:38px;font-size:19px;border-radius:12px}.top-actions{display:flex;gap:9px;align-items:center}.layout{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1440px;margin:auto}.sidebar{padding:24px 15px;border-right:1px solid var(--line);min-height:calc(100vh - 74px);background:#fbfcfe}.nav-btn{width:100%;display:flex;gap:11px;align-items:center;text-align:left;margin:4px 0;background:transparent;color:#526075;padding:12px 14px}.nav-btn.active{background:var(--green2);color:#08764c}.nav-btn .ico{width:22px;text-align:center}.sidebar-note{margin:30px 8px 0;padding:13px;border-radius:12px;background:#fff6e8;color:#80520e;font-size:12px;line-height:1.5}.content{padding:30px;min-width:0}.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:24px}.page-head h1{font-size:28px;letter-spacing:-.7px;margin:0 0 7px}.page-head p{margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:24px}.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:19px;box-shadow:0 3px 12px #17203305}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:650}.stat-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#eff4f9}.stat strong{display:block;font-size:25px;letter-spacing:-.5px;margin-top:14px}.stat small{display:block;color:var(--muted);margin-top:5px;font-size:12px}.panel{background:white;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 3px 12px #17203305}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.panel-head h2{font-size:16px;margin:0}.panel-body{padding:18px 20px}.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.search{max-width:320px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th,td{text-align:left;padding:14px 18px;border-bottom:1px solid #edf0f5;font-size:13px}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;background:#fbfcfe}tbody tr:last-child td{border-bottom:0}.customer{display:flex;align-items:center;gap:10px}.avatar{width:34px;height:34px;border-radius:11px;background:#e6f6ee;color:#08764c;display:grid;place-items:center;font-weight:800}.amount{font-weight:750;font-variant-numeric:tabular-nums}.pill{display:inline-flex;align-items:center;padding:5px 9px;border-radius:30px;font-size:11px;font-weight:750}.pill.debt{background:#fff2dc;color:#9a5b00}.pill.ok{background:#e6f6ee;color:#08764c}.empty{text-align:center;padding:45px 20px;color:var(--muted)}.empty .big{font-size:30px;margin-bottom:8px}.actions{display:flex;gap:6px}.activity-list{display:grid;gap:0}.activity{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-size:13px}.activity:last-child{border:0}.modal-backdrop{position:fixed;inset:0;background:#10182880;z-index:20;display:grid;place-items:center;padding:16px}.modal{background:white;border-radius:18px;width:min(520px,100%);max-height:92vh;overflow:auto;box-shadow:0 24px 80px #10182840}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:18px}.modal-content{padding:20px 22px}.modal-foot{padding:16px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.full{grid-column:1/-1}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#172033;color:white;padding:12px 18px;border-radius:12px;z-index:40;box-shadow:var(--shadow);font-size:14px}.notice{border:1px solid #f0d7a5;background:#fff8e9;color:#79510e;border-radius:12px;padding:13px 15px;font-size:12px;line-height:1.55;margin-bottom:18px}.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.settings-card{border:1px solid var(--line);border-radius:14px;padding:18px}.settings-card h3{margin:0 0 8px;font-size:15px}.settings-card p{font-size:13px;color:var(--muted);line-height:1.5}.mobile-nav{display:none}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:190px minmax(0,1fr)}.content{padding:22px}}
+@media(max-width:700px){.topbar{padding:0 15px;height:64px}.topbar .logo{font-size:17px}.top-actions .btn-label{display:none}.layout{display:block}.sidebar{display:none}.content{padding:19px 14px 90px}.page-head{align-items:flex-start}.page-head h1{font-size:24px}.page-head .toolbar button{font-size:12px;padding:10px}.stats{gap:10px}.stat{padding:14px}.stat strong{font-size:21px}.stat-top{font-size:11px}.stat-icon{width:29px;height:29px}.panel-head{padding:15px}.panel-body{padding:15px}.search{max-width:none;flex:1;min-width:140px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:8;background:white;border-top:1px solid var(--line);padding:7px 5px calc(7px + env(safe-area-inset-bottom));justify-content:space-around}.mobile-nav button{background:transparent;color:#657186;display:grid;gap:3px;justify-items:center;font-size:10px;padding:5px 7px}.mobile-nav button.active{color:var(--green)}.mobile-nav span{font-size:19px}.settings-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.top-actions button{padding:9px}.login-card{padding:24px}.table-wrap table{min-width:650px}}
+</style>
+</head>
+<body>
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <div class="logo"><div class="logo-mark">✓</div><span>Fiado Fácil</span></div>
+    <h1>Entre na sua loja</h1><p class="muted">Controle de fiado simples e organizado.</p>
+    <form id="loginForm">
+      <div class="field"><label for="username">Usuário</label><input id="username" autocomplete="username" value="admin" required></div>
+      <div class="field"><label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" placeholder="Digite a senha" required></div>
+      <button type="submit">Entrar</button>
+    </form>
+    <div class="hint"><b>Acesso de demonstração:</b><br>Usuário: <b>admin</b> · Senha: <b>loja123</b><br>Protótipo local: não use dados reais de clientes nesta versão.</div>
+  </div>
+</div>
+<div id="app" class="app hidden">
+  <header class="topbar"><div class="logo"><div class="logo-mark">✓</div><span>Fiado Fácil</span></div><div class="top-actions"><span id="storeLabel" class="muted" style="font-size:13px">Minha loja</span><button class="secondary" onclick="logout()">Sair</button></div></header>
+  <div class="layout">
+    <aside class="sidebar">
+      <button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard')"><span class="ico">▦</span>Visão geral</button>
+      <button class="nav-btn" data-page="customers" onclick="showPage('customers')"><span class="ico">♙</span>Clientes</button>
+      <button class="nav-btn" data-page="transactions" onclick="showPage('transactions')"><span class="ico">↕</span>Movimentações</button>
+      <button class="nav-btn" data-page="settings" onclick="showPage('settings')"><span class="ico">⚙</span>Configurações</button>
+      <div class="sidebar-note"><b>💡 Dica</b><br>Registre cada compra e pagamento para manter o saldo atualizado.</div>
+    </aside>
+    <main class="content">
+      <section id="dashboardPage">
+        <div class="page-head"><div><h1>Visão geral</h1><p>Acompanhe o fiado da sua loja.</p></div><div class="toolbar"><button onclick="openTransaction('debt')">＋ Novo fiado</button></div></div>
+        <div class="notice"><b>Versão de demonstração:</b> os dados ficam somente neste navegador/aparelho. O login é ilustrativo e não protege os dados como um sistema online seguro. Não use informações pessoais reais nesta versão.</div>
+        <div class="stats">
+          <div class="stat"><div class="stat-top"><span>Total a receber</span><span class="stat-icon">💰</span></div><strong id="totalDebt">R$ 0,00</strong><small>Saldo em aberto</small></div>
+          <div class="stat"><div class="stat-top"><span>Clientes</span><span class="stat-icon">♙</span></div><strong id="customerCount">0</strong><small>Cadastrados</small></div>
+          <div class="stat"><div class="stat-top"><span>Com saldo devedor</span><span class="stat-icon">◷</span></div><strong id="owingCount">0</strong><small>Clientes com fiado</small></div>
+          <div class="stat"><div class="stat-top"><span>Pagamentos recebidos</span><span class="stat-icon">✓</span></div><strong id="paidTotal">R$ 0,00</strong><small>Total registrado</small></div>
+        </div>
+        <div class="panel"><div class="panel-head"><h2>Clientes com saldo em aberto</h2><button class="secondary small" onclick="showPage('customers')">Ver clientes</button></div><div id="dashboardCustomers" class="table-wrap"></div></div>
+        <div class="panel" style="margin-top:18px"><div class="panel-head"><h2>Movimentações recentes</h2><button class="secondary small" onclick="showPage('transactions')">Ver todas</button></div><div id="recentActivity" class="panel-body"></div></div>
+      </section>
+      <section id="customersPage" class="hidden">
+        <div class="page-head"><div><h1>Clientes</h1><p>Cadastre clientes e acompanhe seus saldos.</p></div><button onclick="openCustomer()">＋ Novo cliente</button></div>
+        <div class="panel"><div class="panel-head"><h2>Lista de clientes</h2><input id="customerSearch" class="search" placeholder="Buscar por nome ou telefone..." oninput="renderCustomers()"></div><div id="customersTable" class="table-wrap"></div></div>
+      </section>
+      <section id="transactionsPage" class="hidden">
+        <div class="page-head"><div><h1>Movimentações</h1><p>Compras no fiado e pagamentos registrados.</p></div><div class="toolbar"><button onclick="openTransaction('debt')">＋ Novo fiado</button><button class="secondary" onclick="openTransaction('payment')">Receber pagamento</button></div></div>
+        <div class="panel"><div class="panel-head"><h2>Histórico</h2><input id="transactionSearch" class="search" placeholder="Buscar cliente ou descrição..." oninput="renderTransactions()"></div><div id="transactionsTable" class="table-wrap"></div></div>
+      </section>
+      <section id="settingsPage" class="hidden">
+        <div class="page-head"><div><h1>Configurações</h1><p>Personalize e faça cópia dos dados desta demonstração.</p></div></div>
+        <div class="notice"><b>Atenção:</b> exportar dados cria uma cópia em arquivo. Este protótipo não tem sincronização entre aparelhos, recuperação de senha nem armazenamento seguro em servidor.</div>
+        <div class="settings-grid">
+          <div class="settings-card"><h3>🏪 Nome da loja</h3><p>O nome aparece no topo do aplicativo.</p><div class="field"><label>Nome da loja</label><input id="storeNameInput" placeholder="Ex.: Mercado Central"></div><button onclick="saveStoreName()">Salvar nome</button></div>
+          <div class="settings-card"><h3>📦 Exportar cópia de segurança</h3><p>Baixe um arquivo JSON com clientes e movimentações deste navegador.</p><button onclick="exportData()">Exportar dados</button></div>
+          <div class="settings-card"><h3>📥 Importar cópia</h3><p>Carregue uma cópia JSON exportada anteriormente. Isso substitui os dados atuais.</p><input id="importFile" type="file" accept=".json,application/json" style="max-width:100%;margin:8px 0"><button class="secondary" onclick="importData()">Importar dados</button></div>
+          <div class="settings-card"><h3>🧹 Dados de demonstração</h3><p>Apague todos os clientes e lançamentos salvos neste navegador.</p><button class="danger" onclick="clearData()">Apagar todos os dados</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <nav class="mobile-nav">
+    <button class="active" data-page="dashboard" onclick="showPage('dashboard')"><span>▦</span>Início</button>
+    <button data-page="customers" onclick="showPage('customers')"><span>♙</span>Clientes</button>
+    <button data-page="transactions" onclick="showPage('transactions')"><span>↕</span>Fiado</button>
+    <button data-page="settings" onclick="showPage('settings')"><span>⚙</span>Ajustes</button>
+  </nav>
+</div>
+<div id="modalRoot"></div><div id="toast" class="toast hidden"></div>
+<script>
+const STORAGE_KEY='fiado_facil_demo_v1';
+let state={customers:[],transactions:[],storeName:'Minha loja'};
+let currentPage='dashboard', toastTimer;
+const money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(n)||0);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateLabel=s=>new Date(s).toLocaleDateString('pt-BR');
+function load(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY));if(x&&Array.isArray(x.customers)&&Array.isArray(x.transactions))state={...state,...x}}catch(e){}}
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderAll()}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add('hidden'),2600)}
+function login(e){e.preventDefault();const u=document.getElementById('username').value.trim(),p=document.getElementById('password').value;if(u==='admin'&&p==='loja123'){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.remove('hidden');load();renderAll()}else toast('Usuário ou senha incorretos.')}
+document.getElementById('loginForm').addEventListener('submit',login);
+function logout(){document.getElementById('app').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('password').value=''}
+function showPage(p){currentPage=p;['dashboard','customers','transactions','settings'].forEach(x=>document.getElementById(x+'Page').classList.toggle('hidden',x!==p));document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));if(p==='customers')renderCustomers();if(p==='transactions')renderTransactions();if(p==='dashboard')renderDashboard();if(p==='settings')document.getElementById('storeNameInput').value=state.storeName||'';window.scrollTo(0,0)}
+function balance(id){return state.transactions.filter(t=>t.customerId===id).reduce((s,t)=>s+(t.type==='debt'?Number(t.amount):-Number(t.amount)),0)}
+function totalOwed(){return state.customers.reduce((s,c)=>s+Math.max(0,balance(c.id)),0)}
+function fmtDate(s){return s?dateLabel(s):'—'}
+function renderAll(){document.getElementById('storeLabel').textContent=state.storeName||'Minha loja';renderDashboard();if(currentPage==='customers')renderCustomers();if(currentPage==='transactions')renderTransactions()}
+function renderDashboard(){
+ document.getElementById('totalDebt').textContent=money(totalOwed());
+ document.getElementById('customerCount').textContent=state.customers.length;
+ document.getElementById('owingCount').textContent=state.customers.filter(c=>balance(c.id)>0.005).length;
+ document.getElementById('paidTotal').textContent=money(state.transactions.filter(t=>t.type==='payment').reduce((s,t)=>s+Number(t.amount),0));
+ const owed=state.customers.filter(c=>balance(c.id)>0.005).sort((a,b)=>balance(b.id)-balance(a.id)).slice(0,6);
+ document.getElementById('dashboardCustomers').innerHTML=owed.length?`<table><thead><tr><th>Cliente</th><th>Telefone</th><th>Saldo</th><th>Ação</th></tr></thead><tbody>${owed.map(c=>`<tr><td><div class="customer"><div class="avatar">${esc((c.name||'?').slice(0,1).toUpperCase())}</div><b>${esc(c.name)}</b></div></td><td>${esc(c.phone||'—')}</td><td class="amount">${money(balance(c.id))}</td><td><button class="secondary small" onclick="openTransaction('payment','${c.id}')">Receber</button></td></tr>`).join('')}</tbody></table>`:`<div class="empty"><div class="big">🧾</div><b>Nenhum fiado em aberto</b><p>Cadastre um cliente e registre a primeira compra.</p><button onclick="openCustomer()">＋ Cadastrar cliente</button></div>`;
+ const recent=[...state.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+ document.getElementById('recentActivity').innerHTML=recent.length?`<div class="activity-list">${recent.map(t=>{const c=state.customers.find(c=>c.id===t.customerId);return `<div class="activity"><div><b>${esc(c?.name||'Cliente removido')}</b><div class="muted">${esc(t.description|| (t.type==='debt'?'Compra no fiado':'Pagamento'))} · ${fmtDate(t.date)}</div></div><b style="color:${t.type==='debt'?'#a76508':'#16845b'}">${t.type==='debt'?'+':'−'} ${money(t.amount)}</b></div>`}).join('')}</div>`:`<div class="empty"><div class="big">📒</div><b>Sem movimentações ainda</b><p>Suas compras e pagamentos aparecerão aqui.</p></div>`;
+}
+function renderCustomers(){
+ const q=(document.getElementById('customerSearch')?.value||'').toLowerCase();
+ const list=state.customers.filter(c=>(c.name+' '+(c.phone||'')).toLowerCase().includes(q)).sort((a,b)=>a.name.localeCompare(b.name,'pt-BR'));
+ document.getElementById('customersTable').innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>Telefone</th><th>Saldo atual</th><th>Status</th><th>Ações</th></tr></thead><tbody>${list.map(c=>{const b=balance(c.id);return `<tr><td><div class="customer"><div class="avatar">${esc(c.name.slice(0,1).toUpperCase())}</div><div><b>${esc(c.name)}</b><div class="muted">${esc(c.notes||'')}</div></div></div></td><td>${esc(c.phone||'—')}</td><td class="amount">${money(Math.max(0,b))}</td><td><span class="pill ${b>0.005?'debt':'ok'}">${b>0.005?'Em aberto':'Em dia'}</span></td><td><div class="actions"><button class="secondary small" onclick="openTransaction('debt','${c.id}')">＋ Fiado</button><button class="secondary small" onclick="openTransaction('payment','${c.id}')">Receber</button><button class="secondary small" onclick="editCustomer('${c.id}')">Editar</button></div></td></tr>`}).join('')}</tbody></table>`:`<div class="empty"><div class="big">♙</div><b>${q?'Nenhum resultado':'Nenhum cliente cadastrado'}</b><p>${q?'Tente outro nome ou telefone.':'Cadastre seu primeiro cliente para começar.'}</p>${q?'':'<button onclick="openCustomer()">＋ Novo cliente</button>'}</div>`;
+}
+function renderTransactions(){
+ const q=(document.getElementById('transactionSearch')?.value||'').toLowerCase();
+ const list=[...state.transactions].filter(t=>{const c=state.customers.find(c=>c.id===t.customerId);return ((c?.name||'')+' '+(t.description||'')).toLowerCase().includes(q)}).sort((a,b)=>new Date(b.date)-new Date(a.date));
+ document.getElementById('transactionsTable').innerHTML=list.length?`<table><thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Descrição</th><th>Valor</th><th>Ação</th></tr></thead><tbody>${list.map(t=>{const c=state.customers.find(c=>c.id===t.customerId);return `<tr><td>${fmtDate(t.date)}</td><td><b>${esc(c?.name||'Cliente removido')}</b></td><td><span class="pill ${t.type==='debt'?'debt':'ok'}">${t.type==='debt'?'Fiado':'Pagamento'}</span></td><td>${esc(t.description||'—')}</td><td class="amount">${t.type==='debt'?'+':'−'} ${money(t.amount)}</td><td><button class="danger small" onclick="deleteTransaction('${t.id}')">Excluir</button></td></tr>`}).join('')}</tbody></table>`:`<div class="empty"><div class="big">↕</div><b>Nenhuma movimentação encontrada</b><p>Registre um fiado ou pagamento para começar.</p></div>`;
+}
+function openModal(title,body,foot){document.getElementById('modalRoot').innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><h2>${title}</h2><button class="secondary small" onclick="closeModal()">✕</button></div><div class="modal-content">${body}</div><div class="modal-foot">${foot||'<button class="secondary" onclick="closeModal()">Fechar</button>'}</div></div></div>`}
+function closeModal(){document.getElementById('modalRoot').innerHTML=''}
+function openCustomer(c=null){const editing=!!c;openModal(editing?'Editar cliente':'Novo cliente',`<form id="customerForm" onsubmit="submitCustomer(event,'${c?.id||''}')"><div class="field"><label>Nome do cliente *</label><input name="name" required maxlength="100" value="${esc(c?.name||'')}" placeholder="Nome completo"></div><div class="field"><label>Telefone (opcional)</label><input name="phone" maxlength="30" value="${esc(c?.phone||'')}" placeholder="(67) 99999-9999"></div><div class="field"><label>Observação (opcional)</label><textarea name="notes" rows="2" maxlength="250" placeholder="Ex.: cliente antigo">${esc(c?.notes||'')}</textarea></div></form>`,`<button class="secondary" onclick="closeModal()">Cancelar</button><button onclick="document.getElementById('customerForm').requestSubmit()">Salvar cliente</button>`)}
+function editCustomer(id){const c=state.customers.find(x=>x.id===id);if(c)openCustomer(c)}
+function submitCustomer(e,id){e.preventDefault();const f=new FormData(e.target),name=String(f.get('name')).trim();if(!name)return;const existing=id?state.customers.find(c=>c.id===id):null;if(existing)Object.assign(existing,{name,phone:String(f.get('phone')).trim(),notes:String(f.get('notes')).trim()});else state.customers.push({id:crypto.randomUUID(),name,phone:String(f.get('phone')).trim(),notes:String(f.get('notes')).trim(),createdAt:new Date().toISOString()});closeModal();save();toast(existing?'Cliente atualizado.':'Cliente cadastrado.')}
+function openTransaction(type,customerId=''){
+ if(!state.customers.length){toast('Cadastre um cliente primeiro.');openCustomer();return}
+ const opts=state.customers.slice().sort((a,b)=>a.name.localeCompare(b.name,'pt-BR')).map(c=>`<option value="${c.id}" ${c.id===customerId?'selected':''}>${esc(c.name)} — saldo ${money(Math.max(0,balance(c.id)))}</option>`).join('');
+ const isDebt=type==='debt';
+ openModal(isDebt?'Registrar fiado':'Receber pagamento',`<form id="transactionForm" onsubmit="submitTransaction(event,'${type}')"><div class="field"><label>Cliente *</label><select name="customerId" id="txCustomer" required onchange="updateBalanceHint()">${opts}</select><small id="balanceHint" class="muted"></small></div><div class="field"><label>Valor (R$) *</label><input name="amount" type="number" min="0.01" max="100000000" step="0.01" required placeholder="0,00"></div><div class="field"><label>Descrição (opcional)</label><input name="description" maxlength="160" placeholder="${isDebt?'Ex.: compras da semana':'Ex.: pagamento em dinheiro'}"></div><div class="field"><label>Data *</label><input name="date" type="date" required value="${new Date().toISOString().slice(0,10)}"></div></form>`,`<button class="secondary" onclick="closeModal()">Cancelar</button><button onclick="document.getElementById('transactionForm').requestSubmit()">${isDebt?'Registrar fiado':'Registrar pagamento'}</button>`);
+ updateBalanceHint();
+}
+function updateBalanceHint(){const id=document.getElementById('txCustomer')?.value;const el=document.getElementById('balanceHint');if(el&&id)el.textContent='Saldo atual: '+money(Math.max(0,balance(id)))}
+function submitTransaction(e,type){e.preventDefault();const f=new FormData(e.target),customerId=String(f.get('customerId')),amount=Number(f.get('amount')),date=String(f.get('date'));if(!Number.isFinite(amount)||amount<=0){toast('Informe um valor válido.');return}if(type==='payment'&&amount>balance(customerId)+0.005){toast('O pagamento não pode ser maior que o saldo devedor.');return}state.transactions.push({id:crypto.randomUUID(),customerId,type,amount:Math.round(amount*100)/100,description:String(f.get('description')).trim(),date:new Date(date+'T12:00:00').toISOString(),createdAt:new Date().toISOString()});closeModal();save();toast(type==='debt'?'Fiado registrado.':'Pagamento registrado.')}
+function deleteTransaction(id){if(!confirm('Excluir esta movimentação? O saldo do cliente será recalculado.'))return;state.transactions=state.transactions.filter(t=>t.id!==id);save();toast('Movimentação excluída.')}
+function saveStoreName(){state.storeName=document.getElementById('storeNameInput').value.trim()||'Minha loja';save();toast('Nome da loja salvo.')}
+function exportData(){const blob=new Blob([JSON.stringify({...state,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='fiado-facil-backup.json';a.click();URL.revokeObjectURL(url);toast('Cópia de segurança exportada.')}
+function importData(){const file=document.getElementById('importFile').files[0];if(!file){toast('Escolha um arquivo JSON.');return}const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.customers)||!Array.isArray(d.transactions))throw Error();if(!confirm('Isso substituirá os dados atuais. Continuar?'))return;state={customers:d.customers,transactions:d.transactions,storeName:d.storeName||'Minha loja'};save();toast('Dados importados.')}catch(e){toast('Arquivo inválido ou incompatível.')}};r.readAsText(file)}
+function clearData(){if(!confirm('Tem certeza? Todos os clientes e movimentações desta demonstração serão apagados.'))return;state={customers:[],transactions:[],storeName:state.storeName||'Minha loja'};save();toast('Dados apagados.')}
+</script>
+</body>
+</html>
